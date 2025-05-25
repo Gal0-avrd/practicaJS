@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <div id="cabecera">
+        <h1>eventos JS</h1>
+    </div>
+    <div id="menu">
+        <a href="index.html" class="item_menu">Inicio</a>
+        <a href="eventos.html" class="item_menu item_activo">Eventos</a>
+        <a href="css.html" class="item_menu">CSS</a>
+        <a href="form.html" class="item_menu">Form</a>
+        <a href="funciones.html" class="item_menu">Funciones</a>
+        <a href="location.html" class="item_menu">location</a>
+        <a href="windows.html" class="item_menu">windows</a>
+        <a href="DOM.html" class="item_menu">DOM</a>
+        <a href="Animaciones.html" class="item_menu">Animaciones</a>
+        <a href="mariobros.html" class="item_menu">MarioBros</a>
+    </div>
+
+    <input type="button" value="Click" onclick="alert('Hola')">
+    <br><br>
+    <input type="button" value="Doble Click" ondblclick="alert('Hola')">
+    <br><br>
+    <input type="button" value="Onmouseover" onmouseover="alert('Hola')">
+    <br><br>
+    <input type="text" name="" id="" onkeydown="alert('Se ha pulsado una tecla')">
+    <br><br>
+
+    <input type="button" value="Presione el boton" id="boton_script">
+
+</body>
+</html>
+
+<script>
+    document.getElementById("boton_script").addEventListener("click", function() {
+        alert("Ha presionado el boton")
+    });
+</script>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Animaciones</title>
+  <link rel="stylesheet" href="estilos.css">
+  <style>
+    .Animaciones {
+      position: relative;
+      width: 100%;
+      height: 700px;
+      overflow: hidden;
+      margin: 40px 0;
+      border: 2px solid #444;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: black;
+    }
+  </style>
+</head>
+<body>
+    <div id="cabecera">
+    <h1>Animaciones</h1>
+  </div>
+  <div id="menu">
+    <a href="index.html" class="item_menu">Inicio</a>
+    <a href="eventos.html" class="item_menu">Eventos</a>
+    <a href="css.html" class="item_menu">CSS</a>
+    <a href="form.html" class="item_menu">Form</a>
+    <a href="funciones.html" class="item_menu">Funciones</a>
+    <a href="location.html" class="item_menu">location</a>
+    <a href="windows.html" class="item_menu">windows</a>
+    <a href="DOM.html" class="item_menu">DOM</a>
+    <a href="Animaciones.html" class="item_menu item_activo">Animaciones</a>
+    <a href="mariobros.html" class="item_menu">MarioBros</a>
+  </div>
+
+  <!-- Contenedores para cada animación -->
+  <div class="Animaciones"><canvas id="particulasMouse"></canvas></div>
+  <div class="Animaciones"><canvas id="fuegos"></canvas></div>
+
+  <script>
+    function resizeCanvas(canvas) {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+    }
+
+    // 1. Partículas que siguen el mouse
+    (function () {
+      const canvas = document.getElementById('particulasMouse');
+      const ctx = canvas.getContext('2d');
+      resizeCanvas(canvas);
+
+      let particles = [], mouse = { x: 0, y: 0 };
+
+      canvas.addEventListener('mousemove', e => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+        for (let i = 0; i < 5; i++) {
+          particles.push({
+            x: mouse.x,
+            y: mouse.y,
+            size: Math.random() * 5 + 2,
+            speedX: Math.random() * 3 - 1.5,
+            speedY: Math.random() * 3 - 1.5,
+            life: 100
+          });
+        }
+      });
+
+      function animate() {
+        ctx.fillStyle = 'rgba(0,0,0,0.1)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        particles.forEach((p, i) => {
+          p.x += p.speedX;
+          p.y += p.speedY;
+          p.life--;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = 'Red';
+          ctx.fill();
+          if (p.life <= 0) particles.splice(i, 1);
+        });
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+
+    // 2. Fuegos artificiales
+    (function() {
+      const canvas = document.getElementById('fuegos');
+      const ctx = canvas.getContext('2d');
+      resizeCanvas(canvas);
+
+      let fireworks = [];
+
+      function createFirework() {
+        const particles = [];
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height / 2;
+        for (let i = 0; i < 100; i++) {
+          particles.push({
+            x, y,
+            angle: Math.random() * 2 * Math.PI,
+            speed: Math.random() * 5 + 2,
+            life: 100
+          });
+        }
+        fireworks.push(particles);
+      }
+
+      function animate() {
+        ctx.fillStyle = 'rgba(0,0,0,0.2)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        fireworks.forEach((particles, i) => {
+          particles.forEach(p => {
+            const dx = Math.cos(p.angle) * p.speed;
+            const dy = Math.sin(p.angle) * p.speed;
+            p.x += dx;
+            p.y += dy;
+            p.life--;
+            ctx.fillStyle = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            ctx.fillRect(p.x, p.y, 2, 2);
+          });
+          if (particles[0].life <= 0) fireworks.splice(i, 1);
+        });
+
+        if (Math.random() < 0.05) createFirework();
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+
+    // Ajustar tamaño al redimensionar
+    window.addEventListener('resize', () => {
+      document.querySelectorAll('canvas').forEach(resizeCanvas);
+    });
+  </script>
+</body>
+</html>

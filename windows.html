@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows JS</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+    <div id="cabecera">
+        <h1>Windows JS</h1>
+    </div>
+    <div id="menu">
+        <a href="index.html" class="item_menu">Inicio</a>
+        <a href="eventos.html" class="item_menu">Eventos</a>
+        <a href="css.html" class="item_menu">CSS</a>
+        <a href="form.html" class="item_menu">Form</a>
+        <a href="funciones.html" class="item_menu">Funciones</a>
+        <a href="location.html" class="item_menu">location</a>
+        <a href="windows.html" class="item_menu item_activo">windows</a>
+        <a href="DOM.html" class="item_menu">DOM</a>
+        <a href="Animaciones.html" class="item_menu">Animaciones</a>
+        <a href="marioB.html" class="item_menu">MarioBros</a>
+    </div>
+
+    <script>
+        alert("Hola Mundo");
+
+        var nombre = prompt("Cual es tu nombre?");
+        alert("Hola " + nombre);
+
+        var respuesta = confirm("Quieres seguir aprendiendo  JavaScript?");
+
+        if(respuesta==true){
+            alert("Bienvenido al curso");
+        }else{
+            alert(":(");
+        }
+    </script>
+</body>
+</html>
